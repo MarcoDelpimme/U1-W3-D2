@@ -170,13 +170,13 @@
 
       const makeItClickable = function () {
         {
-          const removeLetter = document.querySelector("body h1");
-          removeLetter.onclick = function () {
-            const newText = removeLetter.innerText;
-            const newText2 = newText.slice(0, -1);
-            removeLetter.innerText = newText2;
+          const myH1 = document.querySelector("body h1");
+          myH1.onclick = function () {
+            // const textContent = myH1.innerText;
+            // const removeLastLetter = textContent.slice(0, -1);
+            myH1.innerText = myH1.innerText.slice(0, -1);
           };
-          removeLetter.style.cursor = "pointer";
+          myH1.style.cursor = "pointer";
         }
       };
       makeItClickable();
@@ -198,20 +198,139 @@
          La tabella avrà 5 elementi e questa struttura: immagine, nome prodotto, quantità, prezzo
       */
 
-      const generateTable = function () {};
+      // const generateTable = function () {
+      //   const table = document.createElement("table");
+      //   const thead = document.createElement("thead");
+      //   const tbody = document.createElement("tbody");
+      //   table.appendChild(thead);
+      //   table.appendChild(tbody);
+      //   document.getElementById("tableArea").appendChild(table);
+
+      //   let row_1 = document.createElement("tr");
+      //   let heading_1 = document.createElement("th");
+      //   heading_1.innerHTML = "immagine";
+      //   let heading_2 = document.createElement("th");
+      //   heading_2.innerHTML = "nome";
+      //   let heading_3 = document.createElement("th");
+      //   heading_3.innerHTML = "prodotto";
+      //   let heading_4 = document.createElement("th");
+      //   heading_4.innerHTML = "quantità";
+      //   let heading_5 = document.createElement("th");
+      //   heading_5.innerHTML = "prezzo";
+
+      //   row_1.appendChild(heading_1);
+      //   row_1.appendChild(heading_2);
+      //   row_1.appendChild(heading_3);
+      //   row_1.appendChild(heading_4);
+      //   row_1.appendChild(heading_5);
+      //   thead.appendChild(row_1);
+
+      //   let row_2 = document.createElement("tr");
+      //   let row_2_data_1 = document.createElement("td");
+      //   row_2_data_1.innerHTML = "img1";
+      //   let row_2_data_2 = document.createElement("td");
+      //   row_2_data_2.innerHTML = "marco";
+      //   let row_2_data_3 = document.createElement("td");
+      //   row_2_data_3.innerHTML = "umano";
+      //   let row_2_data_4 = document.createElement("td");
+      //   row_2_data_4.innerHTML = "uno";
+      //   let row_2_data_5 = document.createElement("td");
+      //   row_2_data_5.innerHTML = "2kkkk";
+
+      //   row_2.appendChild(row_2_data_1);
+      //   row_2.appendChild(row_2_data_2);
+      //   row_2.appendChild(row_2_data_3);
+      //   row_2.appendChild(row_2_data_4);
+      //   row_2.appendChild(row_2_data_5);
+      //   tbody.appendChild(row_2);
+
+      //   let row_3 = document.createElement("tr");
+      //   let row_3_data_1 = document.createElement("td");
+      //   row_3_data_1.innerHTML = "img2";
+      //   let row_3_data_2 = document.createElement("td");
+      //   row_3_data_2.innerHTML = "stefano";
+      //   let row_3_data_3 = document.createElement("td");
+      //   row_3_data_3.innerHTML = "cyborg";
+      //   let row_3_data_4 = document.createElement("td");
+      //   row_3_data_4.innerHTML = "uno";
+      //   let row_3_data_5 = document.createElement("td");
+      //   row_3_data_5.innerHTML = "3kk";
+
+      //   row_3.appendChild(row_3_data_1);
+      //   row_3.appendChild(row_3_data_2);
+      //   row_3.appendChild(row_3_data_3);
+      //   row_3.appendChild(row_3_data_4);
+      //   row_3.appendChild(row_3_data_5);
+      //   tbody.appendChild(row_3);
+      // };
+      // console.log(generateTable());
+
+      const generateTable = function () {
+        const table = document.createElement("table");
+        const thead = document.createElement("thead");
+        const tbody = document.createElement("tbody");
+        table.appendChild(thead);
+        table.appendChild(tbody);
+
+        const headers = ["immagine", "nome", "prodotto", "quantità", "prezzo"];
+        const data = [
+          ["img1", "marco", "umano", "uno", "2kkkk"],
+          ["img2", "stefano", "cyborg", "uno", "3kk"],
+        ];
+
+        const createRow = (rowData) => {
+          const row = document.createElement("tr");
+          rowData.forEach((value) => {
+            const cell = document.createElement("td");
+            cell.innerHTML = value;
+            row.appendChild(cell);
+          });
+          return row;
+        };
+
+        thead.appendChild(createRow(headers));
+        data.forEach((rowData) => tbody.appendChild(createRow(rowData)));
+
+        document.getElementById("tableArea").appendChild(table);
+      };
+
+      generateTable();
 
       /* ESERCIZIO 12
          Crea una funzione che aggiunga una riga alla tabella precedentemente creata e fornisca i dati necessari come parametri
       */
 
-      const addRow = function () {};
+      const addRow = function (img, nome, prodotto, quantita, prezzo) {
+        const tbody = document.querySelector("table tbody");
+
+        const rowData = [img, nome, prodotto, quantita, prezzo];
+        const createCell = (value) => {
+          const cell = document.createElement("td");
+          cell.innerHTML = value;
+          return cell;
+        };
+
+        const row = document.createElement("tr");
+        rowData.forEach((value) => row.appendChild(createCell(value)));
+
+        tbody.appendChild(row);
+      };
+
+      addRow("img3", "giulia", "androide", "due", "4kk");
 
       /* ESERCIZIO 14
         Crea una funzione che nasconda le immagini della tabella quando eseguita
       */
 
-      const hideAllImages = function () {};
+      const hideAllImages = function () {
+        const imageCells = document.querySelectorAll("table tbody td:first-child");
 
+        imageCells.forEach((cell) => {
+          cell.style.display = "none";
+        });
+      };
+
+      hideAllImages();
       /* EXTRA ESERCIZIO 15
         Crea una funzione che cambi il colore del h2 con id "changeMyColor" con un colore random ad ogni click ricevuto
       */
@@ -226,7 +345,7 @@
       };
 
       const changeColorWithRandom = function () {
-        const h2 = document.querySelector("h2");
+        const h2 = document.getElementById("changeMyColor");
         h2.onclick = function () {
           h2.style.color = getRandomColor();
         };
